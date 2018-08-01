@@ -20,92 +20,98 @@ var (
 	_ = qt422016.AcquireByteBuffer
 )
 
-//line web/home.qtpl:4
-func StreamHome(qw422016 *qt422016.Writer, todos []db.Todo) {
-	//line web/home.qtpl:4
-	qw422016.N().S(`
-  <html>
-    `)
-	//line web/home.qtpl:6
-	streamhead(qw422016)
-	//line web/home.qtpl:6
-	qw422016.N().S(`
-    `)
-	//line web/home.qtpl:7
-	streambody(qw422016, todos)
-	//line web/home.qtpl:7
-	qw422016.N().S(`
-  </html>
-`)
-//line web/home.qtpl:9
-}
-
-//line web/home.qtpl:9
-func WriteHome(qq422016 qtio422016.Writer, todos []db.Todo) {
-	//line web/home.qtpl:9
-	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line web/home.qtpl:9
-	StreamHome(qw422016, todos)
-	//line web/home.qtpl:9
-	qt422016.ReleaseWriter(qw422016)
-//line web/home.qtpl:9
-}
-
-//line web/home.qtpl:9
-func Home(todos []db.Todo) string {
-	//line web/home.qtpl:9
-	qb422016 := qt422016.AcquireByteBuffer()
-	//line web/home.qtpl:9
-	WriteHome(qb422016, todos)
-	//line web/home.qtpl:9
-	qs422016 := string(qb422016.B)
-	//line web/home.qtpl:9
-	qt422016.ReleaseByteBuffer(qb422016)
-	//line web/home.qtpl:9
-	return qs422016
-//line web/home.qtpl:9
+//line web/home.qtpl:5
+type HomeData struct {
+	Flashes []string
+	Todos   []db.Todo
 }
 
 //line web/home.qtpl:11
-func streamhead(qw422016 *qt422016.Writer) {
+func StreamHome(qw422016 *qt422016.Writer, data HomeData) {
 	//line web/home.qtpl:11
+	qw422016.N().S(`
+  <html>
+    `)
+	//line web/home.qtpl:13
+	streamhead(qw422016)
+	//line web/home.qtpl:13
+	qw422016.N().S(`
+    `)
+	//line web/home.qtpl:14
+	streambody(qw422016, data)
+	//line web/home.qtpl:14
+	qw422016.N().S(`
+  </html>
+`)
+//line web/home.qtpl:16
+}
+
+//line web/home.qtpl:16
+func WriteHome(qq422016 qtio422016.Writer, data HomeData) {
+	//line web/home.qtpl:16
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	//line web/home.qtpl:16
+	StreamHome(qw422016, data)
+	//line web/home.qtpl:16
+	qt422016.ReleaseWriter(qw422016)
+//line web/home.qtpl:16
+}
+
+//line web/home.qtpl:16
+func Home(data HomeData) string {
+	//line web/home.qtpl:16
+	qb422016 := qt422016.AcquireByteBuffer()
+	//line web/home.qtpl:16
+	WriteHome(qb422016, data)
+	//line web/home.qtpl:16
+	qs422016 := string(qb422016.B)
+	//line web/home.qtpl:16
+	qt422016.ReleaseByteBuffer(qb422016)
+	//line web/home.qtpl:16
+	return qs422016
+//line web/home.qtpl:16
+}
+
+//line web/home.qtpl:18
+func streamhead(qw422016 *qt422016.Writer) {
+	//line web/home.qtpl:18
 	qw422016.N().S(`
   <head>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@0.7.1/css/bulma.min.css">
   </head>
 `)
-//line web/home.qtpl:15
+//line web/home.qtpl:22
 }
 
-//line web/home.qtpl:15
+//line web/home.qtpl:22
 func writehead(qq422016 qtio422016.Writer) {
-	//line web/home.qtpl:15
+	//line web/home.qtpl:22
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line web/home.qtpl:15
+	//line web/home.qtpl:22
 	streamhead(qw422016)
-	//line web/home.qtpl:15
+	//line web/home.qtpl:22
 	qt422016.ReleaseWriter(qw422016)
-//line web/home.qtpl:15
+//line web/home.qtpl:22
 }
 
-//line web/home.qtpl:15
+//line web/home.qtpl:22
 func head() string {
-	//line web/home.qtpl:15
+	//line web/home.qtpl:22
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line web/home.qtpl:15
+	//line web/home.qtpl:22
 	writehead(qb422016)
-	//line web/home.qtpl:15
+	//line web/home.qtpl:22
 	qs422016 := string(qb422016.B)
-	//line web/home.qtpl:15
+	//line web/home.qtpl:22
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line web/home.qtpl:15
+	//line web/home.qtpl:22
 	return qs422016
-//line web/home.qtpl:15
+//line web/home.qtpl:22
 }
 
-//line web/home.qtpl:17
+//line web/home.qtpl:24
 func streamform(qw422016 *qt422016.Writer) {
-	//line web/home.qtpl:17
+	//line web/home.qtpl:24
 	qw422016.N().S(`
   <form action="/todo" method="POST">
     <div class="field has-addons">
@@ -117,56 +123,56 @@ func streamform(qw422016 *qt422016.Writer) {
       </div>
   </form>
 `)
-//line web/home.qtpl:27
+//line web/home.qtpl:34
 }
 
-//line web/home.qtpl:27
+//line web/home.qtpl:34
 func writeform(qq422016 qtio422016.Writer) {
-	//line web/home.qtpl:27
+	//line web/home.qtpl:34
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line web/home.qtpl:27
+	//line web/home.qtpl:34
 	streamform(qw422016)
-	//line web/home.qtpl:27
+	//line web/home.qtpl:34
 	qt422016.ReleaseWriter(qw422016)
-//line web/home.qtpl:27
+//line web/home.qtpl:34
 }
 
-//line web/home.qtpl:27
+//line web/home.qtpl:34
 func form() string {
-	//line web/home.qtpl:27
+	//line web/home.qtpl:34
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line web/home.qtpl:27
+	//line web/home.qtpl:34
 	writeform(qb422016)
-	//line web/home.qtpl:27
+	//line web/home.qtpl:34
 	qs422016 := string(qb422016.B)
-	//line web/home.qtpl:27
+	//line web/home.qtpl:34
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line web/home.qtpl:27
+	//line web/home.qtpl:34
 	return qs422016
-//line web/home.qtpl:27
+//line web/home.qtpl:34
 }
 
-//line web/home.qtpl:29
+//line web/home.qtpl:36
 func streamlist(qw422016 *qt422016.Writer, todos []db.Todo) {
-	//line web/home.qtpl:29
+	//line web/home.qtpl:36
 	qw422016.N().S(`
   `)
-	//line web/home.qtpl:30
+	//line web/home.qtpl:37
 	for _, todo := range todos {
-		//line web/home.qtpl:30
+		//line web/home.qtpl:37
 		qw422016.N().S(`
     `)
-		//line web/home.qtpl:31
+		//line web/home.qtpl:38
 		if !todo.Done {
-			//line web/home.qtpl:31
+			//line web/home.qtpl:38
 			qw422016.N().S(`
     <nav class="box level">
       <div class="level-left">
         <div class="level-item">
           <form action="/todo/`)
-			//line web/home.qtpl:35
+			//line web/home.qtpl:42
 			qw422016.E().S(todo.Key)
-			//line web/home.qtpl:35
+			//line web/home.qtpl:42
 			qw422016.N().S(`" method="POST" class="is-marginless"> 
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="done" value="true">
@@ -174,98 +180,152 @@ func streamlist(qw422016 *qt422016.Writer, todos []db.Todo) {
           </form>
         </div>
         <div class="level-item"> `)
-			//line web/home.qtpl:41
+			//line web/home.qtpl:48
 			qw422016.E().S(todo.Text)
-			//line web/home.qtpl:41
+			//line web/home.qtpl:48
 			qw422016.N().S(` </div>
       </div>
     </nav>
     `)
-			//line web/home.qtpl:44
+			//line web/home.qtpl:51
 		}
-		//line web/home.qtpl:44
+		//line web/home.qtpl:51
 		qw422016.N().S(`
   `)
-		//line web/home.qtpl:45
+		//line web/home.qtpl:52
 	}
-	//line web/home.qtpl:45
+	//line web/home.qtpl:52
 	qw422016.N().S(`
 `)
-//line web/home.qtpl:46
+//line web/home.qtpl:53
 }
 
-//line web/home.qtpl:46
+//line web/home.qtpl:53
 func writelist(qq422016 qtio422016.Writer, todos []db.Todo) {
-	//line web/home.qtpl:46
+	//line web/home.qtpl:53
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line web/home.qtpl:46
+	//line web/home.qtpl:53
 	streamlist(qw422016, todos)
-	//line web/home.qtpl:46
+	//line web/home.qtpl:53
 	qt422016.ReleaseWriter(qw422016)
-//line web/home.qtpl:46
+//line web/home.qtpl:53
 }
 
-//line web/home.qtpl:46
+//line web/home.qtpl:53
 func list(todos []db.Todo) string {
-	//line web/home.qtpl:46
+	//line web/home.qtpl:53
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line web/home.qtpl:46
+	//line web/home.qtpl:53
 	writelist(qb422016, todos)
-	//line web/home.qtpl:46
+	//line web/home.qtpl:53
 	qs422016 := string(qb422016.B)
-	//line web/home.qtpl:46
+	//line web/home.qtpl:53
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line web/home.qtpl:46
+	//line web/home.qtpl:53
 	return qs422016
-//line web/home.qtpl:46
+//line web/home.qtpl:53
 }
 
-//line web/home.qtpl:48
-func streambody(qw422016 *qt422016.Writer, todos []db.Todo) {
-	//line web/home.qtpl:48
+//line web/home.qtpl:55
+func streamnotifications(qw422016 *qt422016.Writer, flashes []string) {
+	//line web/home.qtpl:55
+	qw422016.N().S(`
+  `)
+	//line web/home.qtpl:56
+	for _, flash := range flashes {
+		//line web/home.qtpl:56
+		qw422016.N().S(`
+    <div class="notification"> `)
+		//line web/home.qtpl:57
+		qw422016.E().S(flash)
+		//line web/home.qtpl:57
+		qw422016.N().S(` </div>
+  `)
+		//line web/home.qtpl:58
+	}
+	//line web/home.qtpl:58
+	qw422016.N().S(`
+`)
+//line web/home.qtpl:59
+}
+
+//line web/home.qtpl:59
+func writenotifications(qq422016 qtio422016.Writer, flashes []string) {
+	//line web/home.qtpl:59
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	//line web/home.qtpl:59
+	streamnotifications(qw422016, flashes)
+	//line web/home.qtpl:59
+	qt422016.ReleaseWriter(qw422016)
+//line web/home.qtpl:59
+}
+
+//line web/home.qtpl:59
+func notifications(flashes []string) string {
+	//line web/home.qtpl:59
+	qb422016 := qt422016.AcquireByteBuffer()
+	//line web/home.qtpl:59
+	writenotifications(qb422016, flashes)
+	//line web/home.qtpl:59
+	qs422016 := string(qb422016.B)
+	//line web/home.qtpl:59
+	qt422016.ReleaseByteBuffer(qb422016)
+	//line web/home.qtpl:59
+	return qs422016
+//line web/home.qtpl:59
+}
+
+//line web/home.qtpl:61
+func streambody(qw422016 *qt422016.Writer, data HomeData) {
+	//line web/home.qtpl:61
 	qw422016.N().S(`
   <body>
     <section class="section">
       <div class="container">
         `)
-	//line web/home.qtpl:52
-	streamlist(qw422016, todos)
-	//line web/home.qtpl:52
+	//line web/home.qtpl:65
+	streamnotifications(qw422016, data.Flashes)
+	//line web/home.qtpl:65
+	qw422016.N().S(`
+        `)
+	//line web/home.qtpl:66
+	streamlist(qw422016, data.Todos)
+	//line web/home.qtpl:66
 	qw422016.N().S(`        
         `)
-	//line web/home.qtpl:53
+	//line web/home.qtpl:67
 	streamform(qw422016)
-	//line web/home.qtpl:53
+	//line web/home.qtpl:67
 	qw422016.N().S(`        
       </div>
     </section>
   </body>
 `)
-//line web/home.qtpl:57
+//line web/home.qtpl:71
 }
 
-//line web/home.qtpl:57
-func writebody(qq422016 qtio422016.Writer, todos []db.Todo) {
-	//line web/home.qtpl:57
+//line web/home.qtpl:71
+func writebody(qq422016 qtio422016.Writer, data HomeData) {
+	//line web/home.qtpl:71
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line web/home.qtpl:57
-	streambody(qw422016, todos)
-	//line web/home.qtpl:57
+	//line web/home.qtpl:71
+	streambody(qw422016, data)
+	//line web/home.qtpl:71
 	qt422016.ReleaseWriter(qw422016)
-//line web/home.qtpl:57
+//line web/home.qtpl:71
 }
 
-//line web/home.qtpl:57
-func body(todos []db.Todo) string {
-	//line web/home.qtpl:57
+//line web/home.qtpl:71
+func body(data HomeData) string {
+	//line web/home.qtpl:71
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line web/home.qtpl:57
-	writebody(qb422016, todos)
-	//line web/home.qtpl:57
+	//line web/home.qtpl:71
+	writebody(qb422016, data)
+	//line web/home.qtpl:71
 	qs422016 := string(qb422016.B)
-	//line web/home.qtpl:57
+	//line web/home.qtpl:71
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line web/home.qtpl:57
+	//line web/home.qtpl:71
 	return qs422016
-//line web/home.qtpl:57
+//line web/home.qtpl:71
 }

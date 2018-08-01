@@ -1,11 +1,15 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 	"github.com/trashhalo/go-crud/db"
-	"net/http"
 )
+
+var store = sessions.NewCookieStore([]byte("cookiestuff"))
 
 func main() {
 	err := db.OpenDB()

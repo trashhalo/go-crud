@@ -1,10 +1,17 @@
 {% package web %}
 {% import "github.com/trashhalo/go-crud/db" %}
 
-{% func Home(todos []db.Todo) %}
+{% code 
+  type HomeData struct {
+    Flashes []string
+    Todos []db.Todo
+  }
+%}
+
+{% func Home(data HomeData) %}
   <html>
     {%= head() %}
-    {%= body(todos) %}
+    {%= body(data) %}
   </html>
 {% endfunc %}
 
@@ -45,11 +52,18 @@
   {% endfor %}
 {% endfunc %}
 
-{% func body(todos []db.Todo) %}
+{% func notifications(flashes []string) %}
+  {% for _, flash := range flashes %}
+    <div class="notification"> {%s flash %} </div>
+  {% endfor %}
+{% endfunc %}
+
+{% func body(data HomeData) %}
   <body>
     <section class="section">
       <div class="container">
-        {%= list(todos) %}        
+        {%= notifications(data.Flashes) %}
+        {%= list(data.Todos) %}        
         {%= form() %}        
       </div>
     </section>
