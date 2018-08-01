@@ -1,0 +1,59 @@
+{% package web %}
+{% import "github.com/trashhalo/go-crud/db" %}
+
+{% func Home(todos []db.Todo) %}
+  <html>
+    {%= head() %}
+    {%= body(todos) %}
+  </html>
+{% endfunc %}
+
+{% func head() %}
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@0.7.1/css/bulma.min.css">
+  </head>
+{% endfunc %}
+
+{% func form() %}
+  <form action="/todo" method="POST">
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <input class="input" name="todo" type="text">
+      </div>
+      <div class="control">
+        <input class="button is-primary" type="submit" value="todo">
+      </div>
+  </form>
+{% endfunc %}
+
+{% func list(todos []db.Todo) %}
+  {% for _, todo := range todos %}
+    {% if !todo.Done %}
+    <nav class="box level">
+      <div class="level-left">
+        <div class="level-item">
+          <form action="/todo/{%s todo.Key %}" method="POST" class="is-marginless"> 
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="done" value="true">
+            <input type="submit" class="button" value="done">
+          </form>
+        </div>
+        <div class="level-item"> {%s todo.Text %} </div>
+      </div>
+    </nav>
+    {% endif %}
+  {% endfor %}
+{% endfunc %}
+
+{% func body(todos []db.Todo) %}
+  <body>
+    <section class="section">
+      <div class="container">
+        {%= list(todos) %}        
+        {%= form() %}        
+      </div>
+    </section>
+  </body>
+{% endfunc %}
+
+
