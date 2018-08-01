@@ -1,6 +1,6 @@
 # Go Crud
 
-Proof of concept building an old school app with no javascript in golang. Forms. Flash. Templates.
+Proof of concept building an old school app with no javascript in golang. Forms. Flash. Templates. Oh My.
 
 # Technology
 1. Http - native
