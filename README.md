@@ -11,3 +11,6 @@ Proof of concept building an old school app with no javascript in golang. Forms.
 
 # Building
 `./build.sh`
+
+# Why badger?
+I wanted it to be self contained. If you dont want badger in your app swap out the db layer.
